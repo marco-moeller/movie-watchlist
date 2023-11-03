@@ -71,6 +71,7 @@ button {
 
 .icon {
   justify-self: center;
+  aspect-ratio: 1/1;
 }
 
 a {

@@ -57,14 +57,18 @@ const fetchMovieDetails = async (movies) => {
 const renderMovieList = () => {
   mainEL.innerHTML = "";
   mainEL.innerHTML += movieList
-    .sort((a, b) =>
-      a.imdbRating === b.imdbRating
+    .sort((a, b) => {
+      return a.imdbRating === b.imdbRating
         ? a.Title.localeCompare(b.Title)
-        : b.imdbRating - a.imdbRating
-    )
+        : convertNARating(b.imdbRating) - convertNARating(a.imdbRating);
+    })
     .map((movie) => renderMovie(movie));
 };
 
 if (getLastSearch()) {
   fetchMovieDetails(getLastSearch());
 }
+
+const convertNARating = (rating) => {
+  return rating === "N/A" ? 0 : rating;
+};
